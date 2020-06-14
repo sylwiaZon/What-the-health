@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_list"
-        android:name="com.whatthehealth.ui.list.ListFragment"
+        android:name="com.whatthehealth.ui.shoppinglist.ShoppingListFragment"
         tools:layout="@layout/fragment_list" />
 
     <fragment

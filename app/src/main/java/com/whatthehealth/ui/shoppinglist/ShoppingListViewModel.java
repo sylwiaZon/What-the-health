@@ -1,14 +1,14 @@
-package com.whatthehealth.ui.list;
+package com.whatthehealth.ui.shoppinglist;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ListViewModel extends ViewModel {
+public class ShoppingListViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ListViewModel() {
+    public ShoppingListViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is list fragment");
     }

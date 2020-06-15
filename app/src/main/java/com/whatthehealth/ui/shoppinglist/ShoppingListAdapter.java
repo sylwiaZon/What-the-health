@@ -10,15 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.whatthehealth.R;
+import com.whatthehealth.entities.ShopItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListElement> {
 
-    private List<String> shoppingList = new ArrayList<>();
+    private List<ShopItem> shoppingList = new ArrayList<>();
 
-    public void setShoppingList(List<String> shoppingList) {
+    public void setShoppingList(List<ShopItem> shoppingList) {
         this.shoppingList = shoppingList;
         notifyDataSetChanged();
     }
@@ -33,7 +34,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListElemen
     @Override
     public void onBindViewHolder(@NonNull ShoppingListElement holder, int position) {
         TextView textView = holder.itemView.findViewById(R.id.shopping_item);
-        textView.setText(shoppingList.get(position));
+        textView.setText(shoppingList.get(position).getItem());
     }
 
     @Override

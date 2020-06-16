@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,10 +19,15 @@ import java.util.List;
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListElement> {
 
     private List<ShopItem> shoppingList = new ArrayList<>();
+    private Listener listener;
 
     public void setShoppingList(List<ShopItem> shoppingList) {
         this.shoppingList = shoppingList;
         notifyDataSetChanged();
+    }
+
+    public void setListener(Listener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -35,6 +41,21 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListElemen
     public void onBindViewHolder(@NonNull ShoppingListElement holder, int position) {
         TextView textView = holder.itemView.findViewById(R.id.shopping_item);
         textView.setText(shoppingList.get(position).getItem());
+
+        CheckBox checkBox = holder.itemView.findViewById(R.id.checkBox);
+        checkBox.setChecked(shoppingList.get(position).isChecked());
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ShopItem item = shoppingList.get(position);
+                item.setChecked(isChecked);
+                listener.itemChange(item);
+            }
+        });
+    }
+
+    interface Listener{
+        void itemChange(ShopItem item);
     }
 
     @Override

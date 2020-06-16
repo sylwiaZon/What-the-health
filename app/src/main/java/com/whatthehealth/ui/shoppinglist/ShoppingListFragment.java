@@ -5,9 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +25,7 @@ import com.whatthehealth.repositories.ShoppingListRepository;
 
 import java.util.List;
 
-public class ShoppingListFragment extends Fragment {
+public class ShoppingListFragment extends Fragment implements AddShoppingItemFragment.AddItemDialogListener {
 
     private ShoppingListViewModel shoppingListViewModel;
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
@@ -32,7 +38,12 @@ public class ShoppingListFragment extends Fragment {
 
         final RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         final ShoppingListAdapter adapter = new ShoppingListAdapter();
-
+        adapter.setListener(new ShoppingListAdapter.Listener() {
+            @Override
+            public void itemChange(ShopItem item) {
+                shoppingListRepository.changeItemState(item);
+            }
+        });
         shoppingListRepository = new ShoppingListRepository(this.getContext());
 
         shoppingListViewModel = new ViewModelProvider(this).get(ShoppingListViewModel.class);
@@ -46,13 +57,35 @@ public class ShoppingListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         Button plusButton = root.findViewById(R.id.plus_button);
+        AddShoppingItemFragment.AddItemDialogListener listener = this;
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shoppingListRepository.insert(new ShopItem("Jestem jedzeniem"));
+                AddShoppingItemFragment newFragment = new AddShoppingItemFragment();
+                newFragment.setDialogListener(listener);
+                newFragment.show(getChildFragmentManager(), "AddShoppingItem");
             }
         });
+        Button minusButton = root.findViewById(R.id.minus_button);
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shoppingListRepository.deleteCheckedItems();
+            }
+        });
+
         return root;
+    }
+
+    @Override
+    public void onDialogPositiveClick(String text) {
+        ShopItem item = new ShopItem(text);
+        shoppingListRepository.insert(item);
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 
     /*public void onActivityResult(int requestCode, int resultCode, Intent data) {

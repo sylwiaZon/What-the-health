@@ -30,4 +30,16 @@ public class ShoppingListRepository {
             shopItemDao.insert(item);
         });
     }
+
+    public void changeItemState(ShopItem item){
+        ShoppingListDatabase.databaseWriteExecutor.execute(() -> {
+            shopItemDao.updateItem(item);
+        });
+    }
+
+    public void deleteCheckedItems(){
+        ShoppingListDatabase.databaseWriteExecutor.execute(() -> {
+            shopItemDao.deleteItems(true);
+        });
+    }
 }

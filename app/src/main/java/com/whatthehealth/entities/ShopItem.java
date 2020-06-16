@@ -12,8 +12,24 @@ public class ShopItem {
     @ColumnInfo(name = "item")
     private String item;
 
+    @ColumnInfo(name = "checked")
+    private boolean checked;
+
     public ShopItem(String item) {
         this.item = item;
+        checked = false;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public void check() {
+        checked = !checked;
     }
 
     public String getItem() {

@@ -27,7 +27,7 @@ public abstract class ShoppingListDatabase extends RoomDatabase {
             synchronized (ShoppingListDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            ShoppingListDatabase.class, "health_database")
+                            ShoppingListDatabase.class, "shopping_list_database")
                             .build();
                 }
             }

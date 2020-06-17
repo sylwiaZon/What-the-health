@@ -2,12 +2,10 @@ package com.whatthehealth.ui.shoppinglist;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
@@ -24,7 +22,7 @@ public class AddShoppingItemFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.add_shopping_item_dialog, null);
+        View view = inflater.inflate(R.layout.add_item_dialog, null);
         TextView textView = view.findViewById(R.id.new_item);
         builder.setView(view)
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
@@ -44,7 +42,6 @@ public class AddShoppingItemFragment extends DialogFragment {
 
     public interface AddItemDialogListener {
         void onDialogPositiveClick(String text);
-        void onDialogNegativeClick(DialogFragment dialog);
     }
 
 }

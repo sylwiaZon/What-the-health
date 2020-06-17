@@ -35,6 +35,7 @@ public class ShoppingListFragment extends Fragment implements AddShoppingItemFra
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_list, container, false);
         getActivity().setTitle("Shopping List");
+        shoppingListRepository = new ShoppingListRepository(this.getContext());
 
         final RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         final ShoppingListAdapter adapter = new ShoppingListAdapter();
@@ -44,7 +45,6 @@ public class ShoppingListFragment extends Fragment implements AddShoppingItemFra
                 shoppingListRepository.changeItemState(item);
             }
         });
-        shoppingListRepository = new ShoppingListRepository(this.getContext());
 
         shoppingListViewModel = new ViewModelProvider(this).get(ShoppingListViewModel.class);
         shoppingListViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<ShopItem>>() {
@@ -83,22 +83,4 @@ public class ShoppingListFragment extends Fragment implements AddShoppingItemFra
         shoppingListRepository.insert(item);
     }
 
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-
-    }
-
-    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            //ShopItem item = new ShopItem(data.getStringExtra(NewWordActivity.EXTRA_REPLY));
-            //shoppingListViewModel.insert(item);
-        } else {
-            //Toast.makeText(
-                    //getApplicationContext(),
-                    //R.string.empty_not_saved,
-                    //Toast.LENGTH_LONG).show();
-        }
-    }*/
 }

@@ -1,19 +1,33 @@
 package com.whatthehealth.ui.fridge;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class FridgeViewModel extends ViewModel {
+import com.whatthehealth.entities.FridgeItem;
+import com.whatthehealth.repositories.FridgeRepository;
+import java.util.List;
 
-    private MutableLiveData<String> mText;
+public class FridgeViewModel extends AndroidViewModel {
 
-    public FridgeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is fridge fragment");
+    private FridgeRepository fridgeRepository;
+
+    private LiveData<List<FridgeItem>> allItems;
+    private LiveData<Integer> itemsCount;
+
+    public FridgeViewModel(Application application) {
+        super(application);
+        fridgeRepository = new FridgeRepository(application);
+        allItems = fridgeRepository.getAllItems();
+        itemsCount = fridgeRepository.getItemsCount();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    LiveData<List<FridgeItem>> getAllItems() { return allItems; }
+
+    public LiveData<Integer> getItemsCount() {
+        return itemsCount;
     }
+
+    public void insert(FridgeItem item) { fridgeRepository.insert(item); }
 }

@@ -23,7 +23,7 @@ public class FridgeViewModel extends AndroidViewModel {
         itemsCount = fridgeRepository.getItemsCount();
     }
 
-    LiveData<List<FridgeItem>> getAllItems() { return allItems; }
+    public LiveData<List<FridgeItem>> getAllItems() { return allItems; }
 
     public LiveData<Integer> getItemsCount() {
         return itemsCount;

@@ -1,19 +1,34 @@
 package com.whatthehealth.ui.favourite;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class FavouriteViewModel extends ViewModel {
+import com.whatthehealth.entities.RecipeItem;
+import com.whatthehealth.repositories.RecipeRepository;
 
-    private MutableLiveData<String> mText;
+import java.util.List;
 
-    public FavouriteViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is favourite fragment");
+public class FavouriteViewModel extends AndroidViewModel {
+
+    private RecipeRepository recipeRepository;
+
+    private LiveData<List<RecipeItem>> allItems;
+    private LiveData<Integer> itemsCount;
+
+    public FavouriteViewModel(Application application) {
+        super(application);
+        recipeRepository = new RecipeRepository(application);
+        allItems = recipeRepository.getAllItems();
+        itemsCount = recipeRepository.getItemsCount();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<RecipeItem>> getAllItems() { return allItems; }
+
+    public LiveData<Integer> getItemsCount() {
+        return itemsCount;
     }
+
+    public void insert(RecipeItem item) { recipeRepository.insert(item); }
 }

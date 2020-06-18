@@ -4,4 +4,6 @@
     <string name="title_favourite">Favourite</string>
     <string name="title_list">List</string>
     <string name="title_fridge">Fridge</string>
+    <string name="sorry_we_couldn_t_find_your_recipe">Sorry. We couldn\'t find your recipe :(</string>
+    <string name="connection_problems_try_later">Connection problems. Try later !</string>
 </resources>

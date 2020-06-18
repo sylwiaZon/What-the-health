@@ -1,4 +1,4 @@
-package com.whatthehealth.ui.search;
+package com.whatthehealth.ui.favourite;
 
 import android.view.View;
 import android.widget.LinearLayout;
@@ -8,13 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.whatthehealth.R;
 
-public class FoundRecipesElement  extends RecyclerView.ViewHolder  {
+public class FavouriteElement extends RecyclerView.ViewHolder  {
     LinearLayout parentLayout;
-
-    public FoundRecipesElement(@NonNull View itemView) {
+    public FavouriteElement(@NonNull View itemView) {
         super(itemView);
         parentLayout = itemView.findViewById(R.id.recipe_element);
 
     }
-
 }

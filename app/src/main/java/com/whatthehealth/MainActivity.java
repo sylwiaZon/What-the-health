@@ -59,11 +59,22 @@ public class MainActivity extends AppCompatActivity {
     }
     public void callNotification() {
         Intent intent = new Intent(getApplicationContext(), ReminderBroadcast.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Calendar calendar = Calendar.getInstance();
+        Calendar current = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pendingIntent);
+        calendar.set(Calendar.HOUR, 9);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.MILLISECOND,0);
+        long trigger = calendar.getTimeInMillis();
+        long curr = current.getTimeInMillis();
+        if(trigger>=curr){
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, trigger,1000*60*60*12, pendingIntent);
+        }else{
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, curr,1000*60*60*12, pendingIntent);
+        }
+
     }
 }

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.whatthehealth.R;
 
 public class FoundRecipesElement  extends RecyclerView.ViewHolder  {
-    LinearLayout parentLayout;
+    public LinearLayout parentLayout;
 
     public FoundRecipesElement(@NonNull View itemView) {
         super(itemView);

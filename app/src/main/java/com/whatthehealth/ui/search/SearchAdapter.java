@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.whatthehealth.R;
 import com.whatthehealth.models.FoundRecipe;
 import com.whatthehealth.ui.recipe.RecipeActivity;
+import com.whatthehealth.ui.recipe.RecipeData;
 
 import java.util.List;
 
@@ -40,11 +41,13 @@ public class SearchAdapter extends RecyclerView.Adapter<FoundRecipesElement>  {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, RecipeActivity.class);
-                System.out.println(recipeList.get(position).getId().toString());
-                intent.putExtra("title", recipeList.get(position).getTitle());
-                intent.putExtra("id", recipeList.get(position).getId().toString());
-                intent.putExtra("image", recipeList.get(position).getImage());
-                intent.putExtra("fav", false);
+                FoundRecipe recipe = recipeList.get(position);
+                intent.putExtra(RecipeActivity.EXTRA_RECIPE, new RecipeData(
+                        recipe.getTitle(),
+                        recipe.getId().toString(),
+                        recipe.getImage(),
+                        false
+                ));
                 context.startActivity(intent);
             }
         });

@@ -40,7 +40,7 @@ public class FavouriteFragment extends Fragment {
                 new ViewModelProvider(this).get(FavouriteViewModel.class);
         getActivity().setTitle("Favourite");
         View root = inflater.inflate(R.layout.fragment_favourite, container, false);
-        recyclerView = root.findViewById(R.id.recycler_view_2);
+        recyclerView = root.findViewById(R.id.search_recycler_view);
         favouriteViewModel.getItemsCount().observe(getViewLifecycleOwner(),integer -> {
             if(integer > 0) {
                 getData();

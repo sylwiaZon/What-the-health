@@ -2,6 +2,7 @@ package com.whatthehealth.network;
 
 import com.whatthehealth.models.FoundRecipe;
 import com.whatthehealth.models.Recipe;
+import com.whatthehealth.models.SimilarRecipe;
 
 import java.util.List;
 import retrofit2.Call;
@@ -14,5 +15,11 @@ public interface GetFoundRecipesService {
     Call<List<FoundRecipe>> getAllRecipes(@Query("ingredients") String ingredients,@Query("ranking") Integer ranking,@Query("number") Integer number, @Query("apiKey") String apiKey);
 
     @GET("recipes/{id}/analyzedInstructions")
-    Call<List<Recipe>> getRecipe(@Path("id") String id , @Query("apiKey") String apiKey);
+    Call<List<Recipe>> getRecipeAnalyzedInstructions(@Path("id") String id , @Query("apiKey") String apiKey);
+
+    @GET("recipes/{id}/similar")
+    Call<List<SimilarRecipe>> getSimilarRecipes(@Path("id") int id, @Query("apiKey") String apiKey);
+
+    @GET("recipes/{id}/information")
+    Call<FoundRecipe> getRecipeInfo(@Path("id") int id, @Query("apiKey") String apiKey);
 }

@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -21,7 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-
+    private BroadcastReceiver networkChangedReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +39,16 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        registerReceiver(new NetworkChangeReceiver(), filter);
+        networkChangedReceiver= new NetworkChangeReceiver();
+        registerReceiver(networkChangedReceiver, filter);
         createNotifycationChannel();
         callNotification();
+    }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(networkChangedReceiver);
     }
 
     public void createNotifycationChannel(){

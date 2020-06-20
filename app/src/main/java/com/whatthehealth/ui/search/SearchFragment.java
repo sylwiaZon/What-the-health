@@ -68,7 +68,7 @@ public class SearchFragment extends Fragment {
         getActivity().setTitle("Found recipes");
 
         View root = inflater.inflate(R.layout.fragment_search, container, false);
-        recyclerView = root.findViewById(R.id.recycler_view_2);
+        recyclerView = root.findViewById(R.id.search_recycler_view);
         fridgeViewModel.getItemsCount().observe(getViewLifecycleOwner(),integer -> {
             if(integer > 0) {
                 setIngredinetsFromFridge();

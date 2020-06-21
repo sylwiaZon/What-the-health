@@ -18,11 +18,15 @@ public class RecipeItem {
     @ColumnInfo(name = "image")
     private String image;
 
+    @ColumnInfo(name = "ingredients")
+    private String ingredients;
 
-    public RecipeItem(String id, String title, String image) {
+
+    public RecipeItem(String id, String title, String image,String ingredients) {
         this.id = id;
         this.title = title;
         this.image = image;
+        this.ingredients = ingredients;
     }
 
     public String getId() {
@@ -34,6 +38,7 @@ public class RecipeItem {
     public String getImage() {
         return this.image;
     }
+    public String getIngredients(){return this.ingredients;}
 
     public void setId(String id) {
         this.id = id;
@@ -44,5 +49,6 @@ public class RecipeItem {
     public void setImage(String image) {
         this.image = image;
     }
+    public void setIngredients(String ingredients){this.ingredients = ingredients;}
 
 }

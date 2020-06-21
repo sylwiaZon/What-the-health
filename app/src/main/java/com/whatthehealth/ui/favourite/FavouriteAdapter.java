@@ -46,6 +46,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteElement>   {
                         recipe.getTitle(),
                         recipe.getId().toString(),
                         recipe.getImage(),
+                        recipe.getIngredients(),
                         true
                 ));
                 context.startActivity(intent);

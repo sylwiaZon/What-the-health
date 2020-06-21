@@ -9,14 +9,14 @@ public class Step
     @SerializedName("equipment")
     private List<Object> equipment;
     @SerializedName("ingredients")
-    private List<Ingredients> ingredients;
+    private List<Object> ingredients;
     @SerializedName("number")
     private int number;
     @SerializedName("step")
     private String step;
 
     public void setEquipment(List<Object> equipment){ this.equipment = equipment; }
-    public void setIngredients(List<Ingredients> ingredients){
+    public void setIngredients(List<Object> ingredients){
         this.ingredients = ingredients;
     }
     public void setNumber(int number){
@@ -28,7 +28,7 @@ public class Step
     public List<Object> getEquipment(){
         return this.equipment;
     }
-    public List<Ingredients> getIngredients(){
+    public List<Object> getIngredients(){
         return this.ingredients;
     }
     public int getNumber(){

@@ -16,15 +16,15 @@ public class FoundRecipe {
     @SerializedName("missedIngredientCount")
     private Integer missedIngredientCount;
     @SerializedName("missedIngredients")
-    ArrayList < Object > missedIngredients = new ArrayList < Object > ();
+    ArrayList < Ingredients > missedIngredients = new ArrayList < Ingredients > ();
     @SerializedName("title")
     private String title;
     @SerializedName("unusedIngredients")
-    ArrayList < Object > unusedIngredients = new ArrayList < Object > ();
+    ArrayList < Ingredients > unusedIngredients = new ArrayList < Ingredients > ();
     @SerializedName("usedIngredientCount")
     private Integer usedIngredientCount;
     @SerializedName("usedIngredients")
-    ArrayList < Object > usedIngredients = new ArrayList< Object >();
+    ArrayList < Ingredients > usedIngredients = new ArrayList< Ingredients >();
 
         public Integer getId() {
             return id;
@@ -47,6 +47,9 @@ public class FoundRecipe {
         public float getUsedIngredientCount() {
             return usedIngredientCount;
         }
+        public ArrayList< Ingredients > getMissedIngredients(){return missedIngredients;}
+        public ArrayList< Ingredients > getUnusedIngredients(){return unusedIngredients;}
+        public ArrayList< Ingredients > getUsedIngredients(){return usedIngredients;}
 
         public void setId(Integer id) {
             this.id = id;
@@ -69,4 +72,13 @@ public class FoundRecipe {
         public void setUsedIngredientCount(Integer usedIngredientCount) {
             this.usedIngredientCount = usedIngredientCount;
         }
+        public void setMissedIngredients(ArrayList<Ingredients> missedIngredients) {
+        this.missedIngredients = missedIngredients;
+        }
+        public void setUnusedIngredients(ArrayList<Ingredients> unusedIngredients) {
+        this.unusedIngredients = unusedIngredients;
+    }
+        public void setUsedIngredients(ArrayList<Ingredients> usedIngredients) {
+        this.usedIngredients = usedIngredients;
+    }
 }

@@ -29,7 +29,6 @@ public class RecipeRepository {
     }
 
     public void insert(RecipeItem item) {
-        System.out.println("Inserted !!!!!" + item.getTitle());
         RecipeDatabase.databaseWriteExecutor.execute(() -> {
             recipeItemDao.insert(item);
         });

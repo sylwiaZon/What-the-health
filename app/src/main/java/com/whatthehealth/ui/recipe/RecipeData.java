@@ -7,6 +7,7 @@ public class RecipeData implements Parcelable {
     private String title;
     private String id;
     private String image;
+    private String ingredients;
     private boolean favourite;
 
     public String getTitle() {
@@ -33,6 +34,14 @@ public class RecipeData implements Parcelable {
         this.image = image;
     }
 
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
     public boolean isFavourite() {
         return favourite;
     }
@@ -51,16 +60,18 @@ public class RecipeData implements Parcelable {
         dest.writeString(this.title);
         dest.writeString(this.id);
         dest.writeString(this.image);
+        dest.writeString(this.ingredients);
         dest.writeByte(this.favourite ? (byte) 1 : (byte) 0);
     }
 
     public RecipeData() {
     }
 
-    public RecipeData(String title, String id, String image, boolean favourite) {
+    public RecipeData(String title, String id, String image,String ingredients, boolean favourite) {
         this.title = title;
         this.id = id;
         this.image = image;
+        this.ingredients = ingredients;
         this.favourite = favourite;
     }
 
@@ -68,6 +79,7 @@ public class RecipeData implements Parcelable {
         this.title = in.readString();
         this.id = in.readString();
         this.image = in.readString();
+        this.ingredients = in.readString();
         this.favourite = in.readByte() != 0;
     }
 

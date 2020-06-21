@@ -47,6 +47,7 @@ public class RecipeActivity extends AppCompatActivity {
                             response.body().getTitle(),
                             response.body().getId().toString(),
                             response.body().getImage(),
+                            recipeFragment.getRecipeData().getIngredients(),
                             false
                     );
                     getSupportActionBar().setTitle(recipeData.getTitle());

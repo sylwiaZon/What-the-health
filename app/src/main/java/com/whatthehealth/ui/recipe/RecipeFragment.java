@@ -73,7 +73,7 @@ public class RecipeFragment extends Fragment implements  AddFavouriteRecipeItemF
             recipeFound.setVisibility(View.VISIBLE);
             setImage();
             setRecipeText(recipes);
-            setIngredientsText(recipes);
+            setIngredientsText();
             addButtonAction();
         }
     }
@@ -109,18 +109,10 @@ public class RecipeFragment extends Fragment implements  AddFavouriteRecipeItemF
         recipe_instructions.setText(instructions);
     }
 
-    private void setIngredientsText(List<Recipe> recipes){
-        Recipe recipe = recipes.get(0);
-        String ingredients = "";
-        int counter = 1;
-        for(Step step : recipe.getSteps()){
-            for(Ingredients item : step.getIngredients()){
-                ingredients += counter+".  "+ item.getName()+"\n";
-                counter++;
-            }
-        }
+    private void setIngredientsText(){
+
         TextView recipe_instructions = root.findViewById(R.id.ingredients);
-        recipe_instructions.setText(ingredients);
+        recipe_instructions.setText(recipeData.getIngredients());
     }
 
     public void setRecipeData(RecipeData recipeData) {
@@ -128,11 +120,16 @@ public class RecipeFragment extends Fragment implements  AddFavouriteRecipeItemF
         setUpView();
     }
 
+    public RecipeData getRecipeData(){
+        return recipeData;
+    }
+
     @Override
     public void onDialogPositiveClick() {
         RecipeItem item = new RecipeItem(recipeData.getId(),
                 recipeData.getTitle(),
-                recipeData.getImage());
+                recipeData.getImage(),
+                recipeData.getIngredients());
         recipeRepository.insert(item);
     }
 }

@@ -26,10 +26,11 @@ public class RecipeActivity extends AppCompatActivity {
 
         RecipeData recipeData = getIntent().getParcelableExtra(EXTRA_RECIPE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(recipeData.getTitle());
         recipeFragment = (RecipeFragment)
                 getSupportFragmentManager().findFragmentById(R.id.recipe_fragment);
         recipeFragment.setRecipeData(recipeData);
-        SimilarRecipesFragment similarRecipesFragment = (SimilarRecipesFragment)
+        similarRecipesFragment = (SimilarRecipesFragment)
                 getSupportFragmentManager().findFragmentById(R.id.similar_fragment);
         if(similarRecipesFragment != null){
             similarRecipesFragment.setSimilarToId(Integer.parseInt(recipeData.getId()));

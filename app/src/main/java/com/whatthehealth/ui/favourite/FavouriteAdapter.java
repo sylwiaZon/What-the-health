@@ -14,6 +14,7 @@ import com.whatthehealth.R;
 import com.whatthehealth.entities.RecipeItem;
 import com.whatthehealth.models.FoundRecipe;
 import com.whatthehealth.ui.recipe.RecipeActivity;
+import com.whatthehealth.ui.recipe.RecipeData;
 
 import java.util.List;
 
@@ -36,13 +37,19 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteElement>   {
     public void onBindViewHolder(@NonNull FavouriteElement holder, int position) {
         TextView textView = holder.itemView.findViewById(R.id.recipe_item);
         textView.setText(recipeList.get(position).getTitle());
-        holder.parentLayout.setOnClickListener(view -> {
-            Intent intent = new Intent(context, RecipeActivity.class);
-            intent.putExtra("title", recipeList.get(position).getTitle());
-            intent.putExtra("id", recipeList.get(position).getId());
-            intent.putExtra("image", recipeList.get(position).getImage());
-            intent.putExtra("fav", true);
-            context.startActivity(intent);
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, RecipeActivity.class);
+                RecipeItem recipe = recipeList.get(position);
+                intent.putExtra(RecipeActivity.EXTRA_RECIPE, new RecipeData(
+                        recipe.getTitle(),
+                        recipe.getId().toString(),
+                        recipe.getImage(),
+                        true
+                ));
+                context.startActivity(intent);
+            }
         });
     }
     @Override

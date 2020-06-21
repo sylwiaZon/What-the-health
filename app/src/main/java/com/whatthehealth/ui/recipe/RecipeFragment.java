@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
@@ -61,11 +62,15 @@ public class RecipeFragment extends Fragment implements  AddFavouriteRecipeItemF
     }
 
     private void generateData(List<Recipe> recipes) {
+        ConstraintLayout recipeFound = root.findViewById(R.id.recipe_found);
+        ConstraintLayout recipeNotFound = root.findViewById(R.id.recipe_not_found);
         if(recipes.size() == 0){
-            //setContentView(R.layout.recipe_not_found_screen);
+            recipeNotFound.setVisibility(View.VISIBLE);
+            recipeFound.setVisibility(View.GONE);
         }
         else{
-            //setContentView(R.layout.recipe_activity);
+            recipeNotFound.setVisibility(View.GONE);
+            recipeFound.setVisibility(View.VISIBLE);
             setImage();
             setRecipeText(recipes);
             setIngredientsText(recipes);
